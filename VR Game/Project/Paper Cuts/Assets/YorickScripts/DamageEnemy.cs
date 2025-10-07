@@ -17,6 +17,7 @@ public class DamageEnemy : MonoBehaviour
         ProjectileTypesHandler otherTypeHandler = other.GetComponent<ProjectileTypesHandler>();
         if (otherTypeHandler != null)
         {
+            Destroy(otherTypeHandler.gameObject);
             if (CanDamage(otherTypeHandler.projectileType))
             {
                 Debug.Log(enemyTypesHandler.enemyType + " takes damage from " + otherTypeHandler.projectileType);
