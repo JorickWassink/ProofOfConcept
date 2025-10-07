@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 5397380469826916363}
   - component: {fileID: 5332363835488728107}
   - component: {fileID: 8331954449883754586}
+  - component: {fileID: -8416897232164906250}
+  - component: {fileID: -8632522345130549100}
   m_Layer: 0
   m_Name: ScissorEnemy
   m_TagString: Untagged
@@ -167,3 +169,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageEnemy
   enemyHealth: 3
+--- !u!114 &-8416897232164906250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325887296278862416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c089c02400d6ac245a96428efe03135e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NavMeshMovement
+  target: {fileID: 8452730887675022774, guid: df487af9e77c6ae4dbef940f6e28cfc6, type: 3}
+--- !u!195 &-8632522345130549100
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325887296278862416}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
