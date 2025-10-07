@@ -1,5 +1,4 @@
-using UnityEngine;
-
+[System.Serializable]
 public struct PlayerStats
 {
     public int Kills {  get; set; }

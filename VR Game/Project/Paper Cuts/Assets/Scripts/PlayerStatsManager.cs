@@ -1,44 +1,80 @@
-using UnityEditor.Experimental.GraphView;
+using System.IO;
 using UnityEngine;
 
 public class PlayerStatsManager : MonoBehaviour
 {
-    [SerializeField] TMPro.TextMeshPro hp, waves, scoreUI, kills, HSWaves, HSScore, HSKills;
+    [SerializeField] TMPro.TextMeshPro hp, waves, scoreUI, kills, hSWaves, hSScore, hSKills;
     [SerializeField] PlayerStats stats;
     [SerializeField] int HP;
+
+
+    [SerializeField] string file = "HighScore.json";
     private void Start()
     {
         EventManager.OnTakeDamage += TakeDamage;
         EventManager.OnPlayerDeathCheck += DeathCheck;
+        EventManager.OnKill += Kill;
+        EventManager.OnNewWave += NewWave;
+        EventManager.OnScore += AddScores;
+        EventManager.OnGameEnd += EndGame;
         ResetStats();
     }
     public void Kill() => stats.Kills++;
     public void NewWave() => stats.Waves++;
     public void AddScores(float score) => stats.Scores += score;
-    public bool DeathCheck() => HP <= 0;
+    public bool DeathCheck() => !(HP <= 0);
     public void TakeDamage()
     {
         HP--;
-        hp.text = HP.ToString();
+        if(hp != null) hp.text = HP.ToString();
+        else Debug.LogError("hp not assigned");
     }
     public void EndGame()
     {
-        //TODO: store stats to JSON
-        ShowHighScoreStats();
+        PlayerStats highScores = UpdateHighScore(stats, GetHighScore());
+        ShowHighScoreStats(highScores);
+        SaveHighScore(highScores);
         ShowRunStats();
         ResetStats();
     }
+    private PlayerStats GetHighScore()
+    {
+        if (File.Exists(file))
+        {
+            string json = File.ReadAllText(file);
+            return JsonUtility.FromJson<PlayerStats>(json);
+        }
+        else return new() { Kills = 0, Scores = 0, Waves = 0 };
+    }
+    private PlayerStats UpdateHighScore(PlayerStats runScore, PlayerStats HighScore)
+    {
+        if (HighScore.Kills < runScore.Kills) HighScore.Kills = runScore.Kills;
+        if (HighScore.Scores < runScore.Scores) HighScore.Scores = runScore.Scores;
+        if (HighScore.Waves < runScore.Waves) HighScore.Waves = runScore.Waves;
+        return HighScore;
+    }
+    private void SaveHighScore(PlayerStats highScore)
+    {
+        string json = JsonUtility.ToJson(highScore);
+        File.WriteAllText(file, json);
+    }
     private void ShowRunStats()
     {
-        kills.text = stats.Kills.ToString();
-        waves.text = stats.Waves.ToString();
-        scoreUI.text = stats.Scores.ToString();
+        if (kills != null) kills.text = stats.Kills.ToString();
+        else Debug.LogError("killls not assigned");
+        if (waves != null) waves.text = stats.Waves.ToString();
+        else Debug.LogError("waves not assigned");
+        if (scoreUI != null) scoreUI.text = stats.Scores.ToString();
+        else Debug.LogError("scoreUI not assigned");
     }
-    private void ShowHighScoreStats(PlayerStats HighScore)
+    private void ShowHighScoreStats(PlayerStats highScore)
     {
-        HSKills.text = stats.Kills.ToString();
-        HSWaves.text = stats.Waves.ToString();
-        HSScore.text = stats.Scores.ToString();
+        if (hSKills != null) hSKills.text = highScore.Kills.ToString();
+        else Debug.LogError("hSKillls not assigned");
+        if (hSWaves != null) hSWaves.text = highScore.Waves.ToString();
+        else Debug.LogError("hSWaves not assigned");
+        if (hSScore != null) hSScore.text = highScore.Scores.ToString();
+        else Debug.LogError("hSScore not assigned");
     }
 
     private void ResetStats()
