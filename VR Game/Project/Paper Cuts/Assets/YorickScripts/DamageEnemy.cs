@@ -32,6 +32,7 @@ public class DamageEnemy : MonoBehaviour
         if (enemyHealth <= 0)
         {
             Destroy(gameObject);
+            FindAnyObjectByType<EnemyWavesSystem>().EnemyDied();
         }
     }
     private bool CanDamage(ProjectileTypes projectileType)//hier wordt gechecked of de projectile de enemy kan damagen
