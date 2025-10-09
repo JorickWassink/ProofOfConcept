@@ -1693,7 +1693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectRespawner
   spawner: {fileID: 233987478}
-  prefab: {fileID: 5541892829712759393, guid: 534e2768e87e60e44a6a060542d2e4ec, type: 3}
+  prefab: {fileID: 5541892829712759393, guid: c18c2334d0f5bb94cbb090401535d577, type: 3}
 --- !u!65 &233987477
 BoxCollider:
   m_ObjectHideFlags: 0
