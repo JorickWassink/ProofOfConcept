@@ -1,63 +1,103 @@
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class EnemyWavesSystem : MonoBehaviour
 {
-    private PrefabManager Prefab => PrefabManager.Instance;
+    [Header("Wave Settings")]
+    int addEnemiesToSpawnAmountMax = 5;
+    int addEnemiesToSpawnAmountMin = 1;
 
-    List<DamageEnemy> allEnemies = new();
+    [Tooltip("Time between individual enemy spawns.")]
+    float spawnInterval = 0.5f;
 
+    [Tooltip("Time between waves after all enemies are defeated.")]
+    float waveInterval = 5f; //  NEW: time between waves
+
+    [Header("Runtime Info")]
+    int enemiesToSpawnAmount = 1;
     public int enemiesRemaining = 0;
+    int enemiesSpawned = 0;
+    int waveAmount = 0;
 
-    public int addEnemiesToSpawnAmountMax = 5;
-    public int addEnemiesToSpawnAmountMin = 1;
+    bool waveInProgress = false;
+    bool waveCoroutineActive = false;
+    bool systemActive = true;
 
-    private int enemiesToSpawnAmount = 5;
+    Enemy_Spawn enemySpawn;
 
-    GameObject enemyToSpawn = null;
-    List<GameObject> enemySpawnPoints = new();
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        enemySpawn = FindFirstObjectByType<Enemy_Spawn>();
+        StartCoroutine(WaveMonitorLoop());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator WaveMonitorLoop()
     {
-        SpawnEnemies();
-    }
-
-    void SpawnEnemies()
-    {
-        for (int i = 0; i < enemiesToSpawnAmount; i++) 
+        while (systemActive)
         {
-            // Spawn enemy at enemy spawn point
+            // Wait until no enemies are alive and no wave is currently running
+            if (enemiesRemaining <= 0 && !waveCoroutineActive)
+            {
+                yield return StartCoroutine(WaveLoop());
+            }
 
+            yield return null; // check again next frame
         }
     }
 
-    void GetRandomEnemySpawnPoint()
+    IEnumerator WaveLoop()
     {
-        
+        waveCoroutineActive = true;
+        waveInProgress = true;
+
+        //  Wait between waves
+        Debug.Log($" Waiting {waveInterval} seconds before starting next wave...");
+        yield return new WaitForSeconds(waveInterval);
+
+        // Configure new wave
+        enemiesToSpawnAmount += Random.Range(addEnemiesToSpawnAmountMin, addEnemiesToSpawnAmountMax);
+        enemiesRemaining = enemiesToSpawnAmount;
+        enemiesSpawned = 0;
+        waveAmount++;
+
+        Debug.Log($" Starting wave {waveAmount} ({enemiesToSpawnAmount} enemies)");
+
+        // Spawn enemies gradually
+        for (int i = 0; i < enemiesToSpawnAmount; i++)
+        {
+            enemySpawn.SpawnEnemy();
+            enemiesSpawned++;
+            yield return new WaitForSeconds(spawnInterval);
+        }
+
+        MakeEnemyHarderDifficulty();
+
+        waveInProgress = false;
+        waveCoroutineActive = false;
     }
 
-    GameObject GetRandomEnemy()
+    void MakeEnemyHarderDifficulty()
     {
-        int randomNum = Random.Range(0, 3);
-        if (randomNum == 0)
+        // Example: slightly faster spawn rate each wave
+        spawnInterval = Mathf.Max(0.1f, spawnInterval - 0.05f);
+    }
+
+    public void EnemyDied()
+    {
+        enemiesRemaining--;
+    }
+
+    public void StopWaveSystem()
+    {
+        systemActive = false;
+    }
+
+    public void ResumeWaveSystem()
+    {
+        if (!systemActive)
         {
-            enemyToSpawn = Prefab.Rock;
+            systemActive = true;
+            StartCoroutine(WaveMonitorLoop());
         }
-        else if (randomNum == 1)
-        {
-            enemyToSpawn = Prefab.Paper;
-        }
-        else
-        {
-            enemyToSpawn = Prefab.Scissor;
-        }
-        return enemyToSpawn;
     }
 }
