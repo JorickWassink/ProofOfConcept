@@ -27,7 +27,7 @@ public class Enemy_Spawn : MonoBehaviour
             timer = spawnInterval; // Reset timer
         }
     }
-
+    
     void SpawnEnemy()
     {
         if (spawnPoints.Length == 0 || enemyPrefab.Length == 0)
