@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c089c02400d6ac245a96428efe03135e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NavMeshMovement
-  target: {fileID: 8452730887675022774, guid: df487af9e77c6ae4dbef940f6e28cfc6, type: 3}
+  target: {fileID: 435288184730222648, guid: 4956a90a11343b04fbe6adab2add12a0, type: 3}
 --- !u!195 &-8632522345130549100
 NavMeshAgent:
   m_ObjectHideFlags: 0
