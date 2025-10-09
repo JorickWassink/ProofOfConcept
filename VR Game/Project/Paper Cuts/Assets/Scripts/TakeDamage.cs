@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TakeDamage : MonoBehaviour
 {
@@ -22,8 +23,7 @@ public class TakeDamage : MonoBehaviour
             else
             {
                 EventManager.EndGame();
-                if (endScreen != null) endScreen.SetActive(true);
-                else Debug.LogError("endScreen not assigned");
+                SceneManager.LoadScene("MainMenu_Scene");
             }
         }
     }
