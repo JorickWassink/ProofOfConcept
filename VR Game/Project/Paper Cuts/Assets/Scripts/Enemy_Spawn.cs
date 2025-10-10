@@ -17,9 +17,10 @@ public class Enemy_Spawn : MonoBehaviour
         timer = spawnInterval;
     }
 
-    void Update()
+    public void EnemySpawnInterval()
     {
         timer -= Time.deltaTime;
+        Debug.Log(timer);
 
         if (timer <= 0f)
         {
@@ -27,9 +28,10 @@ public class Enemy_Spawn : MonoBehaviour
             timer = spawnInterval; // Reset timer
         }
     }
-    
-    void SpawnEnemy()
+
+    public void SpawnEnemy()
     {
+        Debug.Log("spawn");
         if (spawnPoints.Length == 0 || enemyPrefab.Length == 0)
             return;
 
