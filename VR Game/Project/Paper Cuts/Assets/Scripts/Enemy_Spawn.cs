@@ -1,7 +1,12 @@
+using NUnit.Framework;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Enemy_Spawn : MonoBehaviour
 {
+    public List<GameObject> enemies = new List<GameObject>();
+
+
     [Header("Enemy Prefabs")]
     public GameObject[] enemyPrefab; // Enemy prefab
 
@@ -38,6 +43,6 @@ public class Enemy_Spawn : MonoBehaviour
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
         GameObject prefabToSpawn = enemyPrefab[Random.Range(0, enemyPrefab.Length)];
 
-        Instantiate(prefabToSpawn, spawnPoint.position, spawnPoint.rotation);
+        enemies.Add(Instantiate(prefabToSpawn, spawnPoint.position, spawnPoint.rotation));
     }
 }

@@ -22,7 +22,7 @@ public class TakeDamage : MonoBehaviour
             }
             else
             {
-                EventManager.EndGame();
+                //EventManager.EndGame();
                 SceneManager.LoadScene("MainMenu_Scene");
             }
         }
