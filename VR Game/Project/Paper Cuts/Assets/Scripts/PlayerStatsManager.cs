@@ -41,7 +41,6 @@ public class PlayerStatsManager : MonoBehaviour
         ShowHighScoreStats(highScores);
         ShowRunStats();
 
-        ResetStats();
     }
     private PlayerStats GetHighScore()
     {
