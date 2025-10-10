@@ -1,0 +1,58 @@
+{
+    "version": 1,
+    "name": "PlayerInput",
+    "maps": [
+        {
+            "name": "Vr",
+            "id": "637ca114-9fe1-42c9-965f-5e92ea6c64c6",
+            "actions": [
+                {
+                    "name": "menu button",
+                    "type": "Button",
+                    "id": "8c21e092-3ddf-4248-9d81-086929ae8cc0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "cc51c8ed-43a8-46eb-917b-76ecca599061",
+                    "path": "<XRController>{RightHand}/{SecondaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "menu button",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Vr",
+            "bindingGroup": "Vr",
+            "devices": [
+                {
+                    "devicePath": "<XRController>{RightHand}/{MenuButton}",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "New Control Scheme",
+            "bindingGroup": "New Control Scheme",
+            "devices": [
+                {
+                    "devicePath": "<XRController>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
