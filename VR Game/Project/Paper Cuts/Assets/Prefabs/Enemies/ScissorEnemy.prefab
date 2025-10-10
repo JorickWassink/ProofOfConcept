@@ -72,7 +72,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d0a9e268090f9c244aa695788d660abe, type: 2}
+  - {fileID: 2100000, guid: f120bed0ef0d2d24aa36f8e3c9a287d5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 177c5ecb0ba79ab4a9a31986ed49d0e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageEnemy
-  enemyHealth: 3
+  enemyHealth: 1
 --- !u!114 &-8416897232164906250
 MonoBehaviour:
   m_ObjectHideFlags: 0

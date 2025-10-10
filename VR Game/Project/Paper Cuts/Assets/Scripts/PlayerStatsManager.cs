@@ -33,6 +33,8 @@ public class PlayerStatsManager : MonoBehaviour
     }
     public void EndGame()
     {
+
+        
         PlayerStats highScores =  GetHighScore();
 
         UpdateHighScore(stats, highScores);
