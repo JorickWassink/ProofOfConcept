@@ -26,6 +26,7 @@ public class ObjectRespawner : MonoBehaviour
         // Only respawn if the current object left the box
         if (currentObject != null && other.gameObject == currentObject)
         {
+            print("bark tuah");
             // Detach the old one so it can fly freely
             currentObject.transform.parent = null;
             // Allow time for the player to fully remove it

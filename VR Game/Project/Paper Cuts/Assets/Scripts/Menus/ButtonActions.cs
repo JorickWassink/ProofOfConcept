@@ -1,5 +1,4 @@
-using TMPro.EditorUtilities;
-using UnityEditor.SearchService;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -7,6 +6,12 @@ using UnityEngine.SceneManagement;
 public class ButtonActions : MonoBehaviour
 {
     [SerializeField] GameObject menus;
+    Enemy_Spawn eS;
+
+    private void Start()
+    {
+        eS = FindAnyObjectByType<Enemy_Spawn>();
+    }
 
     public void QuitGame()
     {
@@ -26,16 +31,22 @@ public class ButtonActions : MonoBehaviour
 
     public void ResumeGame()
     {
-        Time.timeScale = 1f;
-        menus.SetActive(true);
+        menus.SetActive(false);
+        foreach (var enemy in eS.enemies)
+        {
+            enemy.SetActive(true);
+        }
     }
 
     public void PauseGame(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            Time.timeScale = 0f;
             menus.SetActive(true);
+            foreach(var enemy in eS.enemies)
+            {
+                enemy.SetActive(false);
+            }
         }
     }
 }
