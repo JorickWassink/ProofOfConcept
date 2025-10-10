@@ -59,6 +59,7 @@ public class EnemyWavesSystem : MonoBehaviour
         enemiesRemaining = enemiesToSpawnAmount;
         enemiesSpawned = 0;
         waveAmount++;
+        EventManager.NewWave();
 
         Debug.Log($" Starting wave {waveAmount} ({enemiesToSpawnAmount} enemies)");
 
