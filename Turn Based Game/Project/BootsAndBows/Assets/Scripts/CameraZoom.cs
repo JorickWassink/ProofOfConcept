@@ -15,5 +15,5 @@ public class CameraZoom : MonoBehaviour
 
     }
 
-    public void Get
+    
 }
