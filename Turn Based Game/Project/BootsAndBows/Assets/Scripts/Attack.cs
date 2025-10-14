@@ -4,12 +4,16 @@ using UnityEngine.InputSystem;
 
 public class Attack : MonoBehaviour
 {
+    public event Func<float> attack;
+    public event Func<Facing> facing;
     //THIS SCRIPT SHOULD BE INACTIVE ON THE CHARACTERS UNTILL A CHARACTER CHOOSES TO ATTACK, THEN ITLL ACTIVATE ON THAT CHARACTER
     [SerializeField] private LayerMask Playerlayer;
     [SerializeField] private LayerMask Obstaclelayer;
     public Camera cam;
     public float attackRange = 5f;
 
+
+    public Facing GetFacing() => facing?.Invoke() ?? Facing.North;
     private void Start()
     {
         if (cam == null)
@@ -50,6 +54,8 @@ public class Attack : MonoBehaviour
         else if (playerHit.collider != null)
         {
             Debug.Log($"Hit: {playerHit.collider.name}");
+            
+            attack?.Invoke(playerHit.collider.gameObject.GetComponent<Attack>().GetFacing());
         }
         else
         {

@@ -1,5 +1,5 @@
 using UnityEngine;
-[CreateAssetMenu(fileName = "Knight", menuName = "Charracters/Knight")]
+
 public class Knight: BaseCharacter
 {
     [SerializeField] float seccondPercentDamageReduction;
