@@ -4,8 +4,11 @@ using UnityEngine.InputSystem;
 
 public class Attack : MonoBehaviour
 {
-    public event Func<float> attack;
+    public event Func<Facing, float> attack;
     public event Func<Facing> facing;
+    public event Action<Facing, float> damage;
+
+
     //THIS SCRIPT SHOULD BE INACTIVE ON THE CHARACTERS UNTILL A CHARACTER CHOOSES TO ATTACK, THEN ITLL ACTIVATE ON THAT CHARACTER
     [SerializeField] private LayerMask Playerlayer;
     [SerializeField] private LayerMask Obstaclelayer;
@@ -13,7 +16,8 @@ public class Attack : MonoBehaviour
     public float attackRange = 5f;
 
 
-    public Facing GetFacing() => facing?.Invoke() ?? Facing.North;
+    public Facing GetFacing() => facing?.Invoke() ?? Facing.None;
+    public void TakeDamage(float damageTaking) => damage?.Invoke(GetFacing(), damageTaking);
     private void Start()
     {
         if (cam == null)
@@ -53,9 +57,10 @@ public class Attack : MonoBehaviour
         }
         else if (playerHit.collider != null)
         {
-            Debug.Log($"Hit: {playerHit.collider.name}");
-            
-            attack?.Invoke(playerHit.collider.gameObject.GetComponent<Attack>().GetFacing());
+            //inhoud en bijgehorende custom funkties en variabelen zijn door Daniël Geschreven i.v.m. kennen van de scripten en hoe die samen kunnen/moeten werken
+            Attack enemy = playerHit.collider.gameObject.GetComponent<Attack>();
+            float damage = (float)attack?.Invoke(enemy.GetFacing());
+            enemy.TakeDamage(damage);
         }
         else
         {

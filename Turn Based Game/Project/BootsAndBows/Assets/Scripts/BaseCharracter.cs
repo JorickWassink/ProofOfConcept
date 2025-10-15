@@ -14,6 +14,7 @@ public abstract class BaseCharacter : MonoBehaviour
         Attack attackScript = gameObject.GetComponent<Attack>();
         attackScript.attack += DoDamage;
         attackScript.facing += () => facing;
+        attackScript.damage += TakeDamage;
     }
     public abstract float DamageBonus(Facing targetFacing);
     public abstract float DamageReduction(Facing attackerFacing);
