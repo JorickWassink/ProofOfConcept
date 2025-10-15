@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !isMoving)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             targetPosition = mousePos;
@@ -28,6 +28,13 @@ public class PlayerMovement : MonoBehaviour
 
             else if (selectedCharacter != null)
             {
+                float distance = Vector2.Distance(selectedCharacter.transform.position, mousePos);
+                if (distance > selectedCharacter.moveRange)
+                {
+                    Debug.Log("buiten move range");
+                    return;
+                }
+
                 targetPosition = mousePos;
                 isMoving = true;
             }
@@ -37,6 +44,11 @@ public class PlayerMovement : MonoBehaviour
         {
             NavMeshAgent agent = selectedCharacter.GetComponent<NavMeshAgent>();
             agent.SetDestination(targetPosition);
+
+            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+            {
+                isMoving = false;
+            }
         }
     }
 }
