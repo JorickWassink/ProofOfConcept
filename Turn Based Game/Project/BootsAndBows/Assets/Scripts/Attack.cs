@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class Attack : MonoBehaviour
 {
+    BaseCharacter character;
     //THIS SCRIPT SHOULD BE INACTIVE ON THE CHARACTERS UNTILL A CHARACTER CHOOSES TO ATTACK, THEN ITLL ACTIVATE ON THAT CHARACTER
     [SerializeField] private LayerMask Playerlayer;
     [SerializeField] private LayerMask Obstaclelayer;
@@ -15,6 +16,7 @@ public class Attack : MonoBehaviour
         if (cam == null)
             cam = Camera.main;
 
+        character = gameObject.GetComponent<BaseCharacter>();
     }
     public void OnAttack(InputAction.CallbackContext context)
     {
@@ -49,7 +51,9 @@ public class Attack : MonoBehaviour
         }
         else if (playerHit.collider != null)
         {
-            Debug.Log($"Hit: {playerHit.collider.name}");
+            //inhoud en bijgehorende custom funkties en variabelen zijn door Daniël Geschreven i.v.m. kennen van de scripten en hoe die samen kunnen/moeten werken
+            BaseCharacter enemy = playerHit.collider.gameObject.GetComponent<BaseCharacter>();
+            enemy.TakeDamage(enemy.facing, character.DoDamage(enemy.facing));
         }
         else
         {
