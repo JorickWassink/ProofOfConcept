@@ -1,16 +1,24 @@
 using UnityEngine;
 
-public class Bandit: BaseCharacter
+public class Bandit: MonoBehaviour
 {
-    public override float DamageReduction(Facing attackerFacing)
+
+    BaseCharacterInfo character;
+    private void Start()
     {
-        if(facing == attackerFacing) return percentDamageReduction;
+        character = gameObject.GetComponent<BaseCharacterInfo>();
+        gameObject.GetComponent<BaseCharracterAttack>().DamageBonus += DamageBonus;
+        gameObject.GetComponent<BaseCharracterTakeDamage>().DamageReduction += DamageReduction;
+    }
+    public float DamageReduction(Facing attackerFacing)
+    {
+        if(character.facing == attackerFacing) return character.percentDamageReduction;
         else return 1;
     }
 
-    public override float DamageBonus(Facing targetFacing)
+    public float DamageBonus(Facing targetFacing)
     {
-        if (facing == targetFacing) return percentDamageBonus;
+        if (character.facing == targetFacing) return character.percentDamageBonus;
         else return 1;
     }
 }
