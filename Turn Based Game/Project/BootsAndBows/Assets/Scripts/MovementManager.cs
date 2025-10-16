@@ -64,7 +64,7 @@ public class MovementManager : MonoBehaviour
             NavMeshAgent agent = selectedCharacter.GetComponent<NavMeshAgent>();
             if (agent == null)
             {
-                Debug.LogWarning("Selected character heeft geen NavMeshAgent!");
+                Debug.LogWarning("character heeft geen NavMeshAgent!");
                 isMoving = false;
                 return;
             }
