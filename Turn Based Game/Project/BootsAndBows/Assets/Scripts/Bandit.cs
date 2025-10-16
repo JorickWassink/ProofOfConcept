@@ -1,5 +1,5 @@
 using UnityEngine;
-[CreateAssetMenu(fileName = "Bandit", menuName = "Charracters/Bandit")]
+
 public class Bandit: BaseCharacter
 {
     public override float DamageReduction(Facing attackerFacing)
