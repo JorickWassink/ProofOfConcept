@@ -2,15 +2,11 @@ using UnityEngine;
 
 public class NextTurn : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] GameObject scriptHolder;
+    public void SetCam(GameObject currentPlayer)
     {
-        
+        Instantiate(scriptHolder,currentPlayer.transform);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
