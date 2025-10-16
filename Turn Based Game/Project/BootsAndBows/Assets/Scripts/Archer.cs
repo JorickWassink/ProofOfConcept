@@ -1,5 +1,5 @@
 using UnityEngine;
-[CreateAssetMenu(fileName = "Archer", menuName = "Charracters/Archer")]
+
 public class Archer:BaseCharacter
 {
 
