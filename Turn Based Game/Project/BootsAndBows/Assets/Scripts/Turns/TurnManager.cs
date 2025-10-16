@@ -3,17 +3,38 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
     //TODO LINK NAAR SCRIPT 
+    AllPlayersSpawning spawn;
+    NextTurn next;
     int actionCount = 0;
     bool actionAttack = false;
     int baseActionCount = 2;
     int turnIndex = 0;
+    int maxTurnIndex = 0;
+    int turnsElapsed = 0;
     GameObject currentPlayer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //SCRIPT LINKEN
-        //LINK CURRENT PLAYER FROM LIST
-        Reset();
+        spawn = FindAnyObjectByType<AllPlayersSpawning>();
+        next = FindAnyObjectByType<NextTurn>();
+        maxTurnIndex = spawn.AllSpawnedPlayers.Count;
+
+        ResetTurns();
+    }
+
+
+    private void FixedUpdate()
+    {
+        if (actionCount == 2)
+        {
+            EndOfTurn();
+        }
+        if (turnIndex == maxTurnIndex)
+        {
+            ResetTurns();
+        }
+        
     }
 
     /// <summary>
@@ -34,10 +55,21 @@ public class TurnManager : MonoBehaviour
         
     }
 
-    private void Reset()
+    private void EndOfTurn()
     {
         actionCount = baseActionCount;
         actionAttack = false;
-        //
+        turnsElapsed++;
+        currentPlayer = spawn.AllSpawnedPlayers[turnIndex];
+        next.SetCam(currentPlayer);
+        //LINK CURRENT PLAYER FROM LIST
+
+    }
+
+    private void ResetTurns()
+    {
+        turnsElapsed = 0;
+        currentPlayer = spawn.AllSpawnedPlayers[0];
+        next.SetCam(currentPlayer);
     }
 }
