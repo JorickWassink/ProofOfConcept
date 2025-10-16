@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5105933370067259605}
   - component: {fileID: 3748319235812662316}
+  - component: {fileID: 6281022048231614298}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -48,6 +49,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInfo
   playerID: 0
+--- !u!114 &6281022048231614298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219025367362787582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed94b7336f8df7a4793ff622174dbe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DestoryTeamOnDeath
 --- !u!1001 &1902609182892865913
 PrefabInstance:
   m_ObjectHideFlags: 0
