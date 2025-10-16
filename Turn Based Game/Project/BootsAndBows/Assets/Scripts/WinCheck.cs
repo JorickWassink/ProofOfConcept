@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class WinCheck : MonoBehaviour
 {
-    [SerializeField] private float victoryDelay = 3f;         // Delay before switching scenes
-    [SerializeField] private string endSceneName = "EndScene"; // Scene to load on victory
+    [SerializeField] private float victoryDelay = 3f;
+    [SerializeField] private string endSceneName = "EndScene";
 
     private bool gameEnded = false;
 
@@ -13,24 +13,17 @@ public class WinCheck : MonoBehaviour
     {
         if (gameEnded) return;
 
-        // Find all remaining characters that have the Attack component
-        Attack[] allCharacters = FindObjectsByType<Attack>(FindObjectsSortMode.None);
+        PlayerInfo[] allCharacters = FindObjectsByType<PlayerInfo>(FindObjectsSortMode.None);
 
-        // If there are no characters left, nothing to check yet
         if (allCharacters.Length == 0)
             return;
 
-        // Track which players are still alive
         HashSet<int> alivePlayerIDs = new HashSet<int>();
-
-        foreach (Attack character in allCharacters)
+        foreach (PlayerInfo character in allCharacters)
         {
-            // Make sure the Attack script has a valid playerID
-            // (You’ll replace this once your spawn system guarantees it)
             alivePlayerIDs.Add(character.playerID);
         }
 
-        // Check win condition: only one unique playerID left
         if (alivePlayerIDs.Count <= 1)
         {
             gameEnded = true;
@@ -38,7 +31,7 @@ public class WinCheck : MonoBehaviour
             int winnerID = allCharacters[0].playerID;
             Debug.Log($"Player {winnerID} wins!");
 
-            // TODO: Hook this up to your actual UI system when ready
+            // TODO: Replace with your UI system
             // UIManager.Instance.ShowVictoryMessage($"Player {winnerID} wins!");
 
             Invoke(nameof(LoadEndScene), victoryDelay);
