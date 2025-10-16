@@ -30,10 +30,6 @@ public class SelectableCharacter : MonoBehaviour
             attackCircle.SetColor(new Color(1f, 0f, 0f, 0.5f));
             attackCircle.Show(false);
         }
-
-        var agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
     }
 
     void Update()
