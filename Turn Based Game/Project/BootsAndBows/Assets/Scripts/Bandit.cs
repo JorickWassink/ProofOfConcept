@@ -1,13 +1,14 @@
 using UnityEngine;
 
-public class Bandit:MonoBehaviour
+public class Bandit: MonoBehaviour
 {
-    BaseCharacter character;
+
+    BaseCharacterInfo character;
     private void Start()
     {
-        character = gameObject.GetComponent<BaseCharacter>();
-        character.DamageBonus += DamageBonus;
-        character.DamageReduction += DamageReduction;
+        character = gameObject.GetComponent<BaseCharacterInfo>();
+        gameObject.GetComponent<BaseCharracterAttack>().DamageBonus += DamageBonus;
+        gameObject.GetComponent<BaseCharracterTakeDamage>().DamageReduction += DamageReduction;
     }
     public float DamageReduction(Facing attackerFacing)
     {

@@ -1,14 +1,10 @@
 using UnityEngine;
 
-public class Archer:MonoBehaviour 
+public class Archer:MonoBehaviour
 {
-    BaseCharacter character;
     private void Start()
     {
-        character = gameObject.GetComponent<BaseCharacter>();
-        character.DamageBonus += DamageBonus;
-        character.DamageReduction += DamageReduction;
+        gameObject.GetComponent<BaseCharracterAttack>().DamageBonus += (Facing targetFacing) => 1f;
+        gameObject.GetComponent<BaseCharracterTakeDamage>().DamageReduction += (Facing attackerFacing) => 1f;
     }
-    public float DamageBonus(Facing targetFacing) => 1f;
-    public float DamageReduction(Facing attackerFacing) => 1f;
 }
