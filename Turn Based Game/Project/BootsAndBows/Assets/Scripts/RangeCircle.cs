@@ -35,4 +35,10 @@ public class RangeCircle : MonoBehaviour
     {
         lineRenderer.enabled = toggle;
     }
+
+    public void SetColor(Color color)
+    {
+        lineRenderer.startColor = color;
+        lineRenderer.endColor = color;
+    }
 }

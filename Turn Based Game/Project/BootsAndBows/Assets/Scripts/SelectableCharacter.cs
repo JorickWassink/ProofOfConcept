@@ -6,15 +6,30 @@ public class SelectableCharacter : MonoBehaviour
     public bool isSelected = false;
     public float moveRange = 10f;
     public float attackRange = 5f;
+
     private SpriteRenderer sr;
-    private RangeCircle rangeCircle;
+
+    [SerializeField] RangeCircle moveCircle;
+    [SerializeField] RangeCircle attackCircle;
+    
 
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
 
-        rangeCircle = GetComponent<RangeCircle>();
-        rangeCircle.DrawCircle(moveRange);
+        if (moveCircle != null)
+        {
+            moveCircle.DrawCircle(moveRange);
+            moveCircle.SetColor(new Color(0f, 0.8f, 1f, 0.5f));
+            moveCircle.Show(false);
+        }
+
+        if (attackCircle != null)
+        {
+            attackCircle.DrawCircle(attackRange);
+            attackCircle.SetColor(new Color(1f, 0f, 0f, 0.5f));
+            attackCircle.Show(false);
+        }
 
         var agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -23,7 +38,8 @@ public class SelectableCharacter : MonoBehaviour
 
     void Update()
     {
-        rangeCircle.Show(isSelected);
+        moveCircle.Show(isSelected);
+        attackCircle.Show(isSelected);
         if (isSelected)
         {
             sr.color = Color.yellow;
