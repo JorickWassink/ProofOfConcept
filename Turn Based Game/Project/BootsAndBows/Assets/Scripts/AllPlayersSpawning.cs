@@ -1,36 +1,24 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using System;
 using System.Collections.Generic;
 
 public class AllPlayersSpawning : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab = null;
+    [SerializeField] private Tilemap targetTilemap; // Reference to the tilemap
 
-    [SerializeField] private Tilemap targetTilemap;         // Reference to the tilemap
-    [SerializeField] private TileBase[] allowedTiles;       // Tiles that can be chosen
+    //  List to keep track of all spawned players
+    public List<GameObject> AllSpawnedPlayers = new List<GameObject>();
 
-    private int playerAmount = 0;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        SpawnObjects(playerPrefab, playerAmount, GetRandomSpawnLocation());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        SpawnObjects(playerPrefab, 8);
     }
 
     /// <summary>
-    /// Spawns a specified number of prefabs at a given 2D location.
+    /// Spawns a specified number of prefabs at random tile locations.
     /// </summary>
-    /// <param name="paramPlayerPrefab">The player prefab you want to use.</param>
-    /// <param name="paramAmountOfPlayers">How many GameObjects to spawn.</param>
-    /// <param name="paramLocation">The 2D position to spawn them at.</param>
-    public void SpawnObjects(GameObject paramPlayerPrefab, int paramAmountOfPlayers, Vector2 paramLocation)
+    public void SpawnObjects(GameObject paramPlayerPrefab, int paramAmountOfPlayers)
     {
         if (paramPlayerPrefab == null)
         {
@@ -38,57 +26,53 @@ public class AllPlayersSpawning : MonoBehaviour
             return;
         }
 
-        for (int i = 0; i < paramAmountOfPlayers; i++)
-        {
-            // Optionally, add a small random offset so they don’t all stack perfectly
-            Vector2 spawnPosition = paramLocation + UnityEngine.Random.insideUnitCircle * 0.1f;
-
-            Instantiate(paramPlayerPrefab, spawnPosition, Quaternion.identity);
-        }
-    }
-
-    /// <summary>
-    /// Returns a random world position (Vector2) from one of the allowed tiles in the tilemap.
-    /// </summary>
-    public Vector2 GetRandomSpawnLocation()
-    {
         if (targetTilemap == null)
         {
-            Debug.LogWarning("No tilemap assigned!");
-            return Vector2.zero;
+            Debug.LogWarning("No tilemap assigned to the spawner!");
+            return;
         }
 
-        if (allowedTiles == null || allowedTiles.Length == 0)
-        {
-            Debug.LogWarning("No allowed tiles assigned!");
-            return Vector2.zero;
-        }
-
-        // Collect all valid positions
+        // Get all valid tile positions first
         List<Vector3Int> validPositions = new List<Vector3Int>();
-
         BoundsInt bounds = targetTilemap.cellBounds;
-        foreach (Vector3Int pos in bounds.allPositionsWithin)
+
+        foreach (var pos in bounds.allPositionsWithin)
         {
             TileBase tile = targetTilemap.GetTile(pos);
-            if (tile != null && Array.Exists(allowedTiles, t => t == tile))
+            if (tile != null)
             {
                 validPositions.Add(pos);
             }
         }
 
-        // Return random valid position
         if (validPositions.Count == 0)
         {
-            Debug.LogWarning("No valid tiles found in the tilemap!");
-            return Vector2.zero;
+            Debug.LogWarning("No tiles found in the tilemap!");
+            return;
         }
 
-        Vector3Int randomCell = validPositions[UnityEngine.Random.Range(0, validPositions.Count)];
+        // Shuffle the tile positions to ensure randomness and no repeats
+        for (int i = 0; i < validPositions.Count; i++)
+        {
+            Vector3Int temp = validPositions[i];
+            int randomIndex = Random.Range(i, validPositions.Count);
+            validPositions[i] = validPositions[randomIndex];
+            validPositions[randomIndex] = temp;
+        }
 
-        // Convert from cell position to world position
-        Vector3 worldPos = targetTilemap.GetCellCenterWorld(randomCell);
+        // Spawn players on different tiles (or as many as available)
+        int spawnCount = Mathf.Min(paramAmountOfPlayers, validPositions.Count);
 
-        return (Vector2)worldPos;
+        for (int i = 0; i < spawnCount; i++)
+        {
+            Vector3Int cell = validPositions[i];
+            Vector3 worldPos = targetTilemap.GetCellCenterWorld(cell);
+            GameObject newPlayer = Instantiate(paramPlayerPrefab, worldPos, Quaternion.identity);
+
+            // Add the new player to the list
+            AllSpawnedPlayers.Add(newPlayer);
+        }
+
+        Debug.Log($"Spawned {AllSpawnedPlayers.Count} players on unique tiles!");
     }
 }
