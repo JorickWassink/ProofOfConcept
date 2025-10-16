@@ -10,7 +10,7 @@ public class BaseCharracterAttack: MonoBehaviour
     {
         characterInfo = gameObject.GetComponent<BaseCharacterInfo>();
     }
-    public float DoDamage(Facing targetFacing) => characterInfo.damage *= ((DamageBonus?.Invoke(targetFacing) ?? 0f) + SupriceAttack(targetFacing));
+    public float DoDamage(Facing targetFacing) => characterInfo.damage * ((DamageBonus?.Invoke(targetFacing) ?? 0f) + SupriceAttack(targetFacing));
     public float SupriceAttack(Facing seccondCharacterFacing)
     {
         if (seccondCharacterFacing == characterInfo.facing) return 0.1f;

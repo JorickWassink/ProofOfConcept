@@ -1,12 +1,11 @@
-using System;
 using UnityEngine;
 
-public class BaseCharacterInfo  
+public class BaseCharacterInfo:MonoBehaviour
 {
-    [SerializeField] public float hp;
-    [SerializeField] public float range;
-    [SerializeField] public float damage;
-    [SerializeField] public readonly float percentDamageBonus;
-    [SerializeField] public readonly float percentDamageReduction;
+    public float hp;
+    public float range;
+    public float damage;
+    public float percentDamageBonus;
+    public float percentDamageReduction;
     public Facing facing;
 }
