@@ -10,6 +10,8 @@ public class AllPlayersSpawning : MonoBehaviour
     //  List to keep track of all spawned players
     public List<GameObject> AllSpawnedPlayers = new List<GameObject>();
 
+    //PlayerAmountCounter playerAmount = FindFirstObjectByType<PlayerAmountCounter>();
+
     void Start()
     {
         SpawnObjects(playerPrefab, 8);
@@ -71,6 +73,17 @@ public class AllPlayersSpawning : MonoBehaviour
 
             // Add the new player to the list
             AllSpawnedPlayers.Add(newPlayer);
+
+            //Assign player ID if the CharacterInfo script exists
+            PlayerInfo info = newPlayer.GetComponent<PlayerInfo>();
+            if (info != null)
+            {
+                info.playerID = i + 1; // Example: Player 1, Player 2, etc.
+            }
+            else
+            {
+                Debug.LogWarning($"Spawned object '{newPlayer.name}' has no CharacterInfo component!");
+            }
         }
 
         Debug.Log($"Spawned {AllSpawnedPlayers.Count} players on unique tiles!");
