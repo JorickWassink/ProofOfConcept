@@ -128,6 +128,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1814298906338588706, guid: f05387c220c1f6647a3a05486afd4f81, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4570682854611341974}
+    - targetCorrespondingSourceObject: {fileID: 1814298906338588706, guid: f05387c220c1f6647a3a05486afd4f81, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8847871965230346736}
+    - targetCorrespondingSourceObject: {fileID: 1814298906338588706, guid: f05387c220c1f6647a3a05486afd4f81, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3765437237301545739}
   m_SourcePrefab: {fileID: 100100000, guid: f05387c220c1f6647a3a05486afd4f81, type: 3}
 --- !u!1 &237217187843621211 stripped
 GameObject:
@@ -149,7 +155,33 @@ MonoBehaviour:
   hp: 0
   range: 0
   damage: 0
+  percentDamageBonus: 0
+  percentDamageReduction: 0
   facing: 0
+--- !u!114 &8847871965230346736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237217187843621211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b2c5943771cdcc44868a86820632ab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BaseCharracterAttack
+--- !u!114 &3765437237301545739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237217187843621211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ee78f2865859a42912f4ee2f2551f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BaseCharracterTakeDamage
 --- !u!4 &6551142232777019477 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4651437616141592876, guid: f05387c220c1f6647a3a05486afd4f81, type: 3}
@@ -222,6 +254,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2021844982364507274, guid: 8c329f03c8895e348b33b37caf36fca1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7720646388868664904}
+    - targetCorrespondingSourceObject: {fileID: 2021844982364507274, guid: 8c329f03c8895e348b33b37caf36fca1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8553379907783171061}
+    - targetCorrespondingSourceObject: {fileID: 2021844982364507274, guid: 8c329f03c8895e348b33b37caf36fca1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7330963973760600924}
   m_SourcePrefab: {fileID: 100100000, guid: 8c329f03c8895e348b33b37caf36fca1, type: 3}
 --- !u!4 &764164742695544212 stripped
 Transform:
@@ -248,7 +286,33 @@ MonoBehaviour:
   hp: 0
   range: 0
   damage: 0
+  percentDamageBonus: 0
+  percentDamageReduction: 0
   facing: 0
+--- !u!114 &8553379907783171061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416874622363308608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b2c5943771cdcc44868a86820632ab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BaseCharracterAttack
+--- !u!114 &7330963973760600924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416874622363308608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ee78f2865859a42912f4ee2f2551f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BaseCharracterTakeDamage
 --- !u!1001 &9113220097768138146
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -316,6 +380,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2600340580816779156, guid: daf6b4f0dd0da554eab9c4e379213af6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7590353040817107262}
+    - targetCorrespondingSourceObject: {fileID: 2600340580816779156, guid: daf6b4f0dd0da554eab9c4e379213af6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4515489076803816593}
+    - targetCorrespondingSourceObject: {fileID: 2600340580816779156, guid: daf6b4f0dd0da554eab9c4e379213af6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1866129576263027324}
   m_SourcePrefab: {fileID: 100100000, guid: daf6b4f0dd0da554eab9c4e379213af6, type: 3}
 --- !u!4 &6397900903347358936 stripped
 Transform:
@@ -342,4 +412,30 @@ MonoBehaviour:
   hp: 0
   range: 0
   damage: 0
+  percentDamageBonus: 0
+  percentDamageReduction: 0
   facing: 0
+--- !u!114 &4515489076803816593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6516403676149862966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b2c5943771cdcc44868a86820632ab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BaseCharracterAttack
+--- !u!114 &1866129576263027324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6516403676149862966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ee78f2865859a42912f4ee2f2551f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BaseCharracterTakeDamage
