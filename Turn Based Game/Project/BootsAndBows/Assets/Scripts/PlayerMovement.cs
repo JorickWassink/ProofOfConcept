@@ -7,27 +7,54 @@ public class PlayerMovement : MonoBehaviour
     private SelectableCharacter selectedCharacter;
     bool isMoving;
 
+    private void Start()
+    {
+        var agent = GetComponent<NavMeshAgent>();
+
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+    }
+
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonUp(0) && !isMoving)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            targetPosition = mousePos;
-
-
             RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-            if (hit.collider != null && hit.collider.GetComponent<SelectableCharacter>())
-            {
-                if (selectedCharacter != null)
-                    selectedCharacter.isSelected = false;
 
-                selectedCharacter = hit.collider.GetComponent<SelectableCharacter>();
-                selectedCharacter.isSelected = true;
-                isMoving = false;
+            if (hit.collider != null)
+            {
+                SelectableCharacter sc = hit.collider.GetComponent<SelectableCharacter>();
+                SpriteRenderer sp = hit.collider.GetComponent<SpriteRenderer>();
+                
+                if (sc != null && sc.enabled)
+                {
+                    if (selectedCharacter != null)
+                        selectedCharacter.isSelected = false;
+
+                    selectedCharacter = sc;
+                    selectedCharacter.isSelected = true;
+                    isMoving = false;
+                    return;
+                }
+
+                if (sc != null && !sc.enabled && selectedCharacter != null)
+                {
+                    print(sp.color);
+                    Debug.Log("Holy shit je damaged deze guy");
+                    return;
+                }
             }
 
-            else if (selectedCharacter != null)
+            if (selectedCharacter != null)
             {
+                float distance = Vector2.Distance(selectedCharacter.transform.position, mousePos);
+                if (distance > selectedCharacter.moveRange)
+                {
+                    Debug.Log("buiten move range");
+                    return;
+                }
+
                 targetPosition = mousePos;
                 isMoving = true;
             }
@@ -37,6 +64,11 @@ public class PlayerMovement : MonoBehaviour
         {
             NavMeshAgent agent = selectedCharacter.GetComponent<NavMeshAgent>();
             agent.SetDestination(targetPosition);
+
+            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+            {
+                isMoving = false;
+            }
         }
     }
 }

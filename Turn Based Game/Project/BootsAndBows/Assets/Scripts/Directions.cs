@@ -3,5 +3,6 @@ public enum Facing
     North,
     East,
     South,
-    West
+    West,
+    None
 }

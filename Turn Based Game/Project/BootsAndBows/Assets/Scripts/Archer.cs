@@ -1,8 +1,10 @@
 using UnityEngine;
-[CreateAssetMenu(fileName = "Archer", menuName = "Charracters/Archer")]
-public class Archer:BaseCharacter
-{
 
-    public override float DamageBonus(Facing targetFacing) => 1f;
-    public override float DamageReduction(Facing attackerFacing) => 1f;
+public class Archer:MonoBehaviour
+{
+    private void Start()
+    {
+        gameObject.GetComponent<BaseCharracterAttack>().DamageBonus += (Facing targetFacing) => 1f;
+        gameObject.GetComponent<BaseCharracterTakeDamage>().DamageReduction += (Facing attackerFacing) => 1f;
+    }
 }

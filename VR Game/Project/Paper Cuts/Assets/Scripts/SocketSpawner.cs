@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
@@ -25,13 +26,12 @@ public class SocketSpawner : MonoBehaviour
         SpawnWeapon();
     }
 
-    void LateUpdate()
+    public void OnAttack(InputAction.CallbackContext context)
     {
-        // Make holster rotate with player yaw
-        if (playerHead)
+        // Only fire once when the button is *pressed*, not held or released
+        if (context.performed)
         {
-            Vector3 yawOnly = new Vector3(0, playerHead.eulerAngles.y, 0);
-            transform.rotation = Quaternion.Euler(yawOnly);
+            HandleAttackClick();
         }
     }
 
