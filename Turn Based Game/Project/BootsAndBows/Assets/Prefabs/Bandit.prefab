@@ -108,10 +108,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Attack
   Playerlayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   Obstaclelayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   cam: {fileID: 0}
   attackRange: 1
 --- !u!114 &492217482245744983
@@ -298,9 +298,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d20b09ec5b78084ea7923881ff05e70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bandit
-  hp: 0
-  range: 0
-  damage: 0
-  percentDamageBonus: 0
-  percentDamageReduction: 0
-  facing: 0

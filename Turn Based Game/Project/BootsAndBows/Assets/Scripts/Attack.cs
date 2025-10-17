@@ -51,6 +51,7 @@ public class Attack : MonoBehaviour
         }
         else if (playerHit.collider != null)
         {
+            Debug.Log("what fuck");
             //inhoud en bijgehorende custom funkties en variabelen zijn door Daniël Geschreven i.v.m. kennen van de scripten en hoe die samen kunnen/moeten werken
             BaseCharacter enemy = playerHit.collider.gameObject.GetComponent<BaseCharacter>();
             enemy.TakeDamage(enemy.facing, character.DoDamage(enemy.facing));

@@ -63,6 +63,7 @@ public class TurnManager : MonoBehaviour
         currentPlayer = spawn.AllSpawnedPlayers[turnIndex];
         next.SetCam(currentPlayer);
         //LINK CURRENT PLAYER FROM LIST
+        // for everyone but current character turn off the input system component
 
     }
 
