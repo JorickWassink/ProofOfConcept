@@ -5,21 +5,17 @@ using System.Collections.Generic;
 public class AllPlayersSpawning : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab = null;
-    [SerializeField] private Tilemap targetTilemap; // Reference to the tilemap
+    [SerializeField] private Tilemap targetTilemap;
 
-    //  List to keep track of all spawned players
     public List<GameObject> AllSpawnedPlayers = new List<GameObject>();
 
-    //PlayerAmountCounter playerAmount = FindFirstObjectByType<PlayerAmountCounter>();
+    [SerializeField] private int playerAmount = 2; // Configurable in Inspector
 
     void Start()
     {
-        SpawnObjects(playerPrefab, 8);
+        SpawnObjects(playerPrefab, playerAmount);
     }
 
-    /// <summary>
-    /// Spawns a specified number of prefabs at random tile locations.
-    /// </summary>
     public void SpawnObjects(GameObject paramPlayerPrefab, int paramAmountOfPlayers)
     {
         if (paramPlayerPrefab == null)
@@ -34,7 +30,7 @@ public class AllPlayersSpawning : MonoBehaviour
             return;
         }
 
-        // Get all valid tile positions first
+        // Collect valid tile positions
         List<Vector3Int> validPositions = new List<Vector3Int>();
         BoundsInt bounds = targetTilemap.cellBounds;
 
@@ -42,9 +38,7 @@ public class AllPlayersSpawning : MonoBehaviour
         {
             TileBase tile = targetTilemap.GetTile(pos);
             if (tile != null)
-            {
                 validPositions.Add(pos);
-            }
         }
 
         if (validPositions.Count == 0)
@@ -53,7 +47,7 @@ public class AllPlayersSpawning : MonoBehaviour
             return;
         }
 
-        // Shuffle the tile positions to ensure randomness and no repeats
+        // Shuffle positions for randomness
         for (int i = 0; i < validPositions.Count; i++)
         {
             Vector3Int temp = validPositions[i];
@@ -62,30 +56,34 @@ public class AllPlayersSpawning : MonoBehaviour
             validPositions[randomIndex] = temp;
         }
 
-        // Spawn players on different tiles (or as many as available)
+        // Spawn players (teams)
         int spawnCount = Mathf.Min(paramAmountOfPlayers, validPositions.Count);
-
         for (int i = 0; i < spawnCount; i++)
         {
             Vector3Int cell = validPositions[i];
             Vector3 worldPos = targetTilemap.GetCellCenterWorld(cell);
             GameObject newPlayer = Instantiate(paramPlayerPrefab, worldPos, Quaternion.identity);
 
-            // Add the new player to the list
-            AllSpawnedPlayers.Add(newPlayer);
-
-            //Assign player ID if the CharacterInfo script exists
+            // Assign player ID
             PlayerInfo info = newPlayer.GetComponent<PlayerInfo>();
             if (info != null)
             {
-                info.playerID = i + 1; // Example: Player 1, Player 2, etc.
+                info.playerID = i;
+
+                // Random team color
+                Color teamColor = new Color(Random.value, Random.value, Random.value);
+
+                // Apply to all child SpriteRenderers
+                SpriteRenderer[] renderers = newPlayer.GetComponentsInChildren<SpriteRenderer>();
+                foreach (var renderer in renderers)
+                {
+                    renderer.color = teamColor;
+                }
             }
-            else
-            {
-                Debug.LogWarning($"Spawned object '{newPlayer.name}' has no CharacterInfo component!");
-            }
+
+            AllSpawnedPlayers.Add(newPlayer);
         }
 
-        Debug.Log($"Spawned {AllSpawnedPlayers.Count} players on unique tiles!");
+        Debug.Log($"Spawned {AllSpawnedPlayers.Count} teams with random colors!");
     }
 }

@@ -1,23 +1,15 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerMovement : MonoBehaviour
+public class MovementManager : MonoBehaviour
 {
     Vector2 targetPosition;
     private SelectableCharacter selectedCharacter;
     bool isMoving;
 
-    private void Start()
-    {
-        var agent = GetComponent<NavMeshAgent>();
-
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
-    }
-
     private void Update()
     {
-        if (Input.GetMouseButtonUp(0) && !isMoving)
+        if (Input.GetMouseButtonDown(0) && !isMoving)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
@@ -26,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 SelectableCharacter sc = hit.collider.GetComponent<SelectableCharacter>();
                 SpriteRenderer sp = hit.collider.GetComponent<SpriteRenderer>();
-                
+
                 if (sc != null && sc.enabled)
                 {
                     if (selectedCharacter != null)
@@ -40,8 +32,15 @@ public class PlayerMovement : MonoBehaviour
 
                 if (sc != null && !sc.enabled && selectedCharacter != null)
                 {
-                    print(sp.color);
-                    Debug.Log("Holy shit je damaged deze guy");
+                    float distToEnemy = Vector2.Distance(selectedCharacter.transform.position, sc.transform.position);
+                    if (distToEnemy <= selectedCharacter.attackRange)
+                    {
+                        Debug.Log("Damage");
+                    }
+                    else
+                    {
+                        Debug.Log("Deze guy is te ver weg");
+                    }
                     return;
                 }
             }
@@ -51,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
                 float distance = Vector2.Distance(selectedCharacter.transform.position, mousePos);
                 if (distance > selectedCharacter.moveRange)
                 {
-                    Debug.Log("buiten move range");
+                    Debug.Log("Buiten move range");
                     return;
                 }
 
@@ -63,6 +62,13 @@ public class PlayerMovement : MonoBehaviour
         if (isMoving && selectedCharacter != null && selectedCharacter.isSelected)
         {
             NavMeshAgent agent = selectedCharacter.GetComponent<NavMeshAgent>();
+            if (agent == null)
+            {
+                Debug.LogWarning("character heeft geen NavMeshAgent!");
+                isMoving = false;
+                return;
+            }
+
             agent.SetDestination(targetPosition);
 
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
