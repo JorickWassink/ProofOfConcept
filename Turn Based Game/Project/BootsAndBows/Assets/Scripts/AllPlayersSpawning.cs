@@ -11,7 +11,7 @@ public class AllPlayersSpawning : MonoBehaviour
 
     [SerializeField] private int playerAmount = 2; // Configurable in Inspector
 
-    void Start()
+    void Awake()
     {
         SpawnObjects(playerPrefab, playerAmount);
     }

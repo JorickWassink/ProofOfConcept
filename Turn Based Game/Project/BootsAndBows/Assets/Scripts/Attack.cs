@@ -51,11 +51,12 @@ public class Attack : MonoBehaviour
         }
         else if (playerHit.collider != null)
         {
+            Debug.Log("what fuck");
             //inhoud en bijgehorende custom funkties en variabelen zijn door Daniël Geschreven i.v.m. kennen van de scripten en hoe die samen kunnen/moeten werken
             BaseCharracterTakeDamage enemyTakeDamage = playerHit.collider.gameObject.GetComponent<BaseCharracterTakeDamage>();
             Facing enemyFacing = playerHit.collider.gameObject.GetComponent<BaseCharacterInfo>().facing;
 
-            enemyTakeDamage.TakeDamage(enemyFacing, characterAttack.DoDamage(enemyFacing));
+            //enemyTakeDamage.TakeDamage(enemyFacing, characterAttack.DoDamage(enemyFacing));
         }
         else
         {
