@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 67008197998151927}
+  - component: {fileID: 3719863866816126988}
+  - component: {fileID: -2818266587234031638}
   m_Layer: 0
   m_Name: Players
   m_TagString: Untagged
@@ -34,6 +36,31 @@ Transform:
   - {fileID: 7320176770522612348}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3719863866816126988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215018567893118827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3465b8117c478c147add39d8aa26efa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInfo
+  playerID: 0
+--- !u!114 &-2818266587234031638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215018567893118827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed94b7336f8df7a4793ff622174dbe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DestoryTeamOnDeath
 --- !u!1 &4564847589494200085
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,6 +1011,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 67008197998151927}
     m_Modifications:
+    - target: {fileID: 1404256688231402557, guid: 75f3ff39c82ada54587395e0320767cf, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5840517750469302203, guid: 75f3ff39c82ada54587395e0320767cf, type: 3}
       propertyPath: hp
       value: 10
@@ -1222,6 +1253,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 67008197998151927}
     m_Modifications:
+    - target: {fileID: 1920580882303884128, guid: daa154d9d6c423f4fbdf58100da803ec, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4253684005185226575, guid: daa154d9d6c423f4fbdf58100da803ec, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.9025798
@@ -1474,6 +1509,10 @@ PrefabInstance:
     - target: {fileID: 7365914956559087844, guid: 5ba563a5e625a8249a69e22ca99237fb, type: 3}
       propertyPath: damage
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8151514527309161823, guid: 5ba563a5e625a8249a69e22ca99237fb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5159295643494722631, guid: 5ba563a5e625a8249a69e22ca99237fb, type: 3}

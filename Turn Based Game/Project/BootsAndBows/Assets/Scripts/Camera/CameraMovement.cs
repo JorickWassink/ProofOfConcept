@@ -5,7 +5,7 @@ public class CameraMovement : MonoBehaviour
 {
     Rigidbody2D rb;
     Vector2 movementDirection;
-    float speed = 5;
+    float speed = 15;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();

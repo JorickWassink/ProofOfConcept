@@ -5,7 +5,7 @@ public class CameraMoveTowards : MonoBehaviour
     //PLACE SCRIPT NOT ON THE OBJECT YOU WANT TO MOVE TOWARDS BUT PLACE IT ON A CHILD OBJECT WHOSE ONLY PURPOSE IS TO HOLD THE SCRIPT
     Rigidbody2D rb;
     Camera cam;
-    float speed = 10;
+    float speed = 20;
     Transform target;
     
     void Start()

@@ -782,7 +782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WinCheck
   victoryDelay: 3
-  endSceneName: EndScene
+  endSceneName: GameOver
 --- !u!4 &983809362
 Transform:
   m_ObjectHideFlags: 0

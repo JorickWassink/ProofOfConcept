@@ -25,7 +25,7 @@ public class WinCheck : MonoBehaviour
         }
 
         // Win condition: only one team left
-        if (alivePlayerIDs.Count <= 1)
+        if (alivePlayerIDs.Count == 1)
         {
             gameEnded = true;
 
@@ -37,6 +37,18 @@ public class WinCheck : MonoBehaviour
 
             // Load end scene after delay
             Invoke(nameof(LoadEndScene), victoryDelay);
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Print))
+        {
+            foreach(PlayerInfo player in allPlayers)
+            {
+                if (player != allPlayers[0])
+                {
+                    Destroy(player.gameObject);
+                }
+            }
         }
     }
 

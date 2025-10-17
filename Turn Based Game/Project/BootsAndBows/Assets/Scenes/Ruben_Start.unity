@@ -2165,7 +2165,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RubenButtonScript
   settingsCanvas: {fileID: 1435014407}
   musicSlider: {fileID: 1983883311}
-  masterVolumeSlider: {fileID: 167678085}
 --- !u!4 &681604105
 Transform:
   m_ObjectHideFlags: 0
@@ -4134,7 +4133,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Gameplay
+          m_StringArgument: EsatScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1834147223
