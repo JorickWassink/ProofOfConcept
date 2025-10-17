@@ -56,7 +56,7 @@ public class Attack : MonoBehaviour
             BaseCharracterTakeDamage enemyTakeDamage = playerHit.collider.gameObject.GetComponent<BaseCharracterTakeDamage>();
             Facing enemyFacing = playerHit.collider.gameObject.GetComponent<BaseCharacterInfo>().facing;
 
-            enemyTakeDamage.TakeDamage(enemyFacing, characterAttack.DoDamage(enemyFacing));
+            //enemyTakeDamage.TakeDamage(enemyFacing, characterAttack.DoDamage(enemyFacing));
         }
         else
         {

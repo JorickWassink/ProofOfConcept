@@ -6,11 +6,11 @@ public class PlayerMovement : MonoBehaviour
     Vector2 targetPosition;
     private SelectableCharacter selectedCharacter;
     bool isMoving;
+    
 
     private void Start()
     {
         var agent = GetComponent<NavMeshAgent>();
-
         agent.updateRotation = false;
         agent.updateUpAxis = false;
     }
@@ -41,6 +41,8 @@ public class PlayerMovement : MonoBehaviour
                 if (sc != null && !sc.enabled && selectedCharacter != null)
                 {
                     print(sp.color);
+                    BaseCharracterTakeDamage damage = hit.collider.GetComponent<BaseCharracterTakeDamage>();   
+                    damage.TakeDamage(gameObject.GetComponent<BaseCharacterInfo>().damage);
                     Debug.Log("Holy shit je damaged deze guy");
                     return;
                 }

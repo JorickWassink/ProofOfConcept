@@ -6,7 +6,11 @@ public class MovementManager : MonoBehaviour
     Vector2 targetPosition;
     private SelectableCharacter selectedCharacter;
     bool isMoving;
-
+    TurnManager turns;
+    private void Start()
+    {
+        turns = FindAnyObjectByType<TurnManager>();
+    }
     private void Update()
     {
         if (Input.GetMouseButtonDown(0) && !isMoving)
@@ -35,6 +39,9 @@ public class MovementManager : MonoBehaviour
                     float distToEnemy = Vector2.Distance(selectedCharacter.transform.position, sc.transform.position);
                     if (distToEnemy <= selectedCharacter.attackRange)
                     {
+                        BaseCharracterTakeDamage damage = hit.collider.GetComponent<BaseCharracterTakeDamage>();
+                        damage.TakeDamage(3);
+                        turns.ActionCountDown();
                         Debug.Log("Damage");
                     }
                     else
@@ -54,6 +61,7 @@ public class MovementManager : MonoBehaviour
                     return;
                 }
 
+                turns.ActionCountDown();
                 targetPosition = mousePos;
                 isMoving = true;
             }

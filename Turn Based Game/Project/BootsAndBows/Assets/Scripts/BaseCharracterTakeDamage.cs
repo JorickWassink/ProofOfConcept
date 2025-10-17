@@ -10,6 +10,12 @@ public class BaseCharracterTakeDamage: MonoBehaviour
     {
         characterInfo = gameObject.GetComponent<BaseCharacterInfo>();
     }
-
-    public void TakeDamage(Facing attackerFacing, float attackerDamage) => characterInfo.hp -= attackerDamage * (DamageReduction?.Invoke(attackerFacing) ?? 0f);
+    private void Update()
+    {
+        if (characterInfo.hp <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+    public void TakeDamage(float attackerDamage) => characterInfo.hp -= attackerDamage;
 }
