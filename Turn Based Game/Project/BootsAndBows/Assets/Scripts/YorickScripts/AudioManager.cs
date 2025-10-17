@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] AudioClip gameBackgroundMusic;
-    [SerializeField] AudioSource audioSource;
+    [SerializeField] private AudioClip gameBackgroundMusic;
+    [SerializeField] public AudioSource audioSource;
 
     private void Awake()
     {
@@ -15,9 +15,10 @@ public class AudioManager : MonoBehaviour
         PlayMusic(gameBackgroundMusic);
     }
 
-    void PlayMusic(AudioClip clip)
+    public void PlayMusic(AudioClip clip)
     {
         if (audioSource.clip == clip) return;
+
         audioSource.clip = clip;
         audioSource.loop = true;
         audioSource.Play();
