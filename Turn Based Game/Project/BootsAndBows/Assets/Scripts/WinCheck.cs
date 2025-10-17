@@ -32,7 +32,11 @@ public class WinCheck : MonoBehaviour
             int winnerID = allPlayers[0].playerID;
             Debug.Log($"Player {winnerID} wins!");
 
-            // TODO: show message (e.g., UIManager.Instance.ShowVictoryMessage)
+            if (MatchResultManager.Instance != null)
+                MatchResultManager.Instance.SetWinner(winnerID);
+
+            // Load end scene after delay
+            Invoke(nameof(LoadEndScene), victoryDelay);
         }
     }
 
