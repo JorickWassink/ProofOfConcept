@@ -8,13 +8,13 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Characters
   - Water
   - UI
   - VIP_UI
-  - 
-  - 
-  - 
+  - Player
+  - Obstacle
+  - Ground
   - 
   - 
   - 

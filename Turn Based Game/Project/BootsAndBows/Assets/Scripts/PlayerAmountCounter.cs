@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class PlayerAmountCounter : MonoBehaviour
 {
-    public int PlayerCount;
+    public int PlayerCount = 0;
+    public static PlayerAmountCounter Instance;
     public TextMeshProUGUI countText;
     public void CountUp()
     {
@@ -24,6 +25,20 @@ public class PlayerAmountCounter : MonoBehaviour
         if (countText != null)
         {
             countText.text = PlayerCount.ToString();
+        }
+        Debug.Log("player amount = " + PlayerCount);
+    }
+    void Awake()
+    {
+
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 }

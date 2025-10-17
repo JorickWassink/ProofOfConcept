@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class WinCheck : MonoBehaviour
 {
     [SerializeField] private float victoryDelay = 3f;
-    [SerializeField] private string endSceneName = "EndScene";
+    [SerializeField] private string endSceneName = "GameOver";
 
     private bool gameEnded = false;
 
@@ -13,28 +13,42 @@ public class WinCheck : MonoBehaviour
     {
         if (gameEnded) return;
 
-        PlayerInfo[] allCharacters = FindObjectsByType<PlayerInfo>(FindObjectsSortMode.None);
+        PlayerInfo[] allPlayers = FindObjectsByType<PlayerInfo>(FindObjectsSortMode.None);
 
-        if (allCharacters.Length == 0)
+        if (allPlayers.Length == 0)
             return;
 
         HashSet<int> alivePlayerIDs = new HashSet<int>();
-        foreach (PlayerInfo character in allCharacters)
+        foreach (PlayerInfo player in allPlayers)
         {
-            alivePlayerIDs.Add(character.playerID);
+            alivePlayerIDs.Add(player.playerID);
         }
 
-        if (alivePlayerIDs.Count <= 1)
+        // Win condition: only one team left
+        if (alivePlayerIDs.Count == 1)
         {
             gameEnded = true;
 
-            int winnerID = allCharacters[0].playerID;
+            int winnerID = allPlayers[0].playerID;
             Debug.Log($"Player {winnerID} wins!");
 
-            // TODO: Replace with your UI system
-            // UIManager.Instance.ShowVictoryMessage($"Player {winnerID} wins!");
+            if (MatchResultManager.Instance != null)
+                MatchResultManager.Instance.SetWinner(winnerID);
 
+            // Load end scene after delay
             Invoke(nameof(LoadEndScene), victoryDelay);
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Print))
+        {
+            foreach(PlayerInfo player in allPlayers)
+            {
+                if (player != allPlayers[0])
+                {
+                    Destroy(player.gameObject);
+                }
+            }
         }
     }
 
