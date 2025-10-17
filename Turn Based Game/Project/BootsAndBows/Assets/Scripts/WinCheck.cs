@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class WinCheck : MonoBehaviour
 {
     [SerializeField] private float victoryDelay = 3f;
-    [SerializeField] private string endSceneName = "EndScene";
+    [SerializeField] private string endSceneName = "GameOver";
 
     private bool gameEnded = false;
 
